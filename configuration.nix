@@ -1,4 +1,4 @@
-# Edit this configuration file to define what should be installed on
+# Edit this configuration file to define what should be installed :wqon
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
@@ -42,7 +42,7 @@
   # };
 
   # Set your time zone.
-  # time.timeZone = "Europe/Amsterdam";
+  time.timeZone = "Europe/Berlin";
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
@@ -50,6 +50,9 @@
      wget
      vim
      chromium
+     terminator
+     jre
+     openjdk
      git
    ];
 
@@ -81,6 +84,16 @@
   #   isNormalUser = true;
   #   uid = 1000;
   # };
+  users.mutableUsers = false;
+
+  users.extraUsers.nwuensche = {
+    isNormalUser = true;
+    home = "/home/nwuensche";
+    description = "Niklas";
+    extraGroups = ["wheel" "networkmanager" ];
+    hashedPassword = "$6$Xq1B38LOXaM4y$kBFC49X..bv46F8mINe4O4tr5wJp2i92G0jAkkdBsGI1Wkn0CLnsSxw1bgBOJ2oDX6s6JDlrMOVLq5./RrU2m/";
+  };
+  security.sudo.wheelNeedsPassword = true;
 
   # The NixOS release to be compatible with for stateful data such as databases.
   system.stateVersion = "17.03";
